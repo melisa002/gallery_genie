@@ -4,3 +4,8 @@ pandas
 numpy
 tensorflow
 pillow
+db-dtypes
+pyarrow
+sklearn
+concurrent
+keras
