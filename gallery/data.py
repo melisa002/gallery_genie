@@ -1,15 +1,9 @@
 from google.cloud import bigquery
 import pandas as pd
-import numpy as np
-import csv
 import os
-from pathlib import Path
 from PIL import Image
 from io import BytesIO
-import matplotlib.pyplot as plt
 import requests
-import concurrent.futures
-import tensorflow as tf
 from gallery.params import *
 
 def fetching_data():
@@ -73,16 +67,20 @@ def check_and_remove_invalid_images(base_dir):
                 os.remove(file_path)
 
 
-
-
 def save_to_dir(full_df):
     try:
-        movement = full_df['Style']
-        url = full_df['image_url']
+        movement = full_df["Style"]
+        url = full_df["image_url"]
         response = requests.get(url)
         if response.status_code == 200:
+            save_dir = os.path.join(
+                os.path.expanduser(LOCAL_DATA_PATH),
+                "small_data",
+                movement,
+            )
+            os.makedirs(save_dir, exist_ok=True)
             image_data = BytesIO(response.content)
             img = Image.open(image_data)
-            img.save(os.path.join(os.path.expanduser(LOCAL_DATA_PATH), 'small_data', movement, os.path.basename(url)))
+            img.save(os.path.join(save_dir, os.path.basename(url)))
     except Exception as e:
         print(f"Exception occurred while processing URL {url}: {e}")

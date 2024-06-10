@@ -6,6 +6,5 @@ tensorflow
 pillow
 db-dtypes
 pyarrow
-sklearn
-concurrent
-keras
+scikit-learn
+ipdb

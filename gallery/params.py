@@ -9,11 +9,12 @@ TABLE1_NAME=os.environ.get("TABLE1_NAME")
 NODE_NAME = os.environ.get("NODE_NAME")
 REPO_NAME=os.environ.get("REPO_NAME")
 GOOGLE_APPLICATION_CREDENTIALS=os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-IMG_HEIGHT=os.environ.get("IMG_HEIGHT")
-IMG_WIDTH=os.environ.get("IMG_WIDTH")
-BATCH_SIZE=os.environ.get("BATCH_SIZE")
+IMG_HEIGHT=int(os.environ.get("IMG_HEIGHT"))
+IMG_WIDTH=int(os.environ.get("IMG_WIDTH"))
+BATCH_SIZE=int(os.environ.get("BATCH_SIZE"))
 DATASET_DIR=os.environ.get("DATASET_DIR")
 LOCAL_DATA_PATH = os.environ.get("LOCAL_DATA_PATH")
+MODEL_REGISTRY =  os.environ.get("MODEL_REGISTRY")
 
 COLUMN_NAMES= [
     'author_name', 'painting_name', 'image_url', 'Genre', 'Style', 'Nationality',
