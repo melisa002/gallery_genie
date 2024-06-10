@@ -1,15 +1,4 @@
-from google.cloud import bigquery
-import pandas as pd
-import numpy as np
-import csv
-import os
-from pathlib import Path
-from PIL import Image
-from io import BytesIO
-import matplotlib.pyplot as plt
-import requests
-import concurrent.futures
-import tensorflow as tf
+from gallery.registry import save_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.utils import image_dataset_from_directory
 from tensorflow.keras.applications import VGG16
@@ -46,7 +35,7 @@ def image_gen(dataset_dir,batch_size,img_height,img_width):
     return dataset
 
 def create_model():
-    base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+    base_model = VGG16(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT,IMG_WIDTH,3))
     # Freeze the layers of the base model
     for layer in base_model.layers:
         layer.trainable = False
@@ -62,9 +51,13 @@ def create_model():
     # TODO pick top 30 to classify based on , increase sample samplesize.
     """, """
     model.add(Dense(30, activation='softmax'))  # Single neuron for regression output
+    return model
+
+def compile_model(model):
     model.compile(optimizer='adam', loss='mae')
     return model
 
-def train_model(model,dataset):
-    model.fit(dataset, epochs=3)
+def train_model(model,dataset,dataset_val):
+    model.fit(dataset,validation_data=dataset_val, epochs=3)
+    save_model(model)
     return model
