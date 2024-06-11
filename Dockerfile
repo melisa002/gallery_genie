@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 #FROM python:3.10-buster
 FROM ultralytics/ultralytics:latest
+=======
+FROM python:3.10-buster
+>>>>>>> 05dbe082355522629d90ee34174ac562cc96976f
 COPY setup.py setup.py
 COPY requirements.txt requirements.txt
 RUN apt-get update && apt-get install -y libhdf5-dev

@@ -8,7 +8,10 @@ def run():
     dataset_dir = os.path.join(os.path.expanduser(LOCAL_DATA_PATH),'train')
     val_dir = os.path.join(os.path.expanduser(LOCAL_DATA_PATH),'validation')
     if not os.path.exists(dataset_dir):
+<<<<<<< HEAD
         print("Started fetching the data")
+=======
+>>>>>>> 05dbe082355522629d90ee34174ac562cc96976f
         initial_data = fetching_data()
         no_null_data = drop_nulls(initial_data)
         filtered_data, movements = filter_data(no_null_data)
