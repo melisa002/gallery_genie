@@ -8,3 +8,5 @@ db-dtypes
 pyarrow
 scikit-learn
 ipdb
+ultralytics
+comet_ml
