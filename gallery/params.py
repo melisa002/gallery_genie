@@ -15,14 +15,11 @@ BATCH_SIZE=int(os.environ.get("BATCH_SIZE"))
 DATASET_DIR=os.environ.get("DATASET_DIR")
 LOCAL_DATA_PATH = os.environ.get("LOCAL_DATA_PATH")
 MODEL_REGISTRY =  os.environ.get("MODEL_REGISTRY")
-<<<<<<< HEAD
 COMET_WORKSPACE_NAME=os.environ.get("COMET_WORKSPACE_NAME")
 COMET_MODEL_NAME=os.environ.get("MODEL_REGISTRY")
 COMET_PROJECT_NAME=os.environ.get("COMET_PROJECT_NAME")
 COMET_API_KEY = os.environ.get("COMET_API_KEY")
 
-=======
->>>>>>> 05dbe082355522629d90ee34174ac562cc96976f
 
 COLUMN_NAMES= [
     'author_name', 'painting_name', 'image_url', 'Genre', 'Style', 'Nationality',

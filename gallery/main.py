@@ -1,4 +1,4 @@
-from gallery.data import fetching_data, drop_nulls,filter_data,sample_images,save_to_dir, check_and_remove_invalid_images
+from gallery.data import fetching_data, drop_nulls,filter_data,sample_images,save_to_dir, check_and_remove_invalid_images, clean_faulty_images
 from gallery.train import image_gen, create_model, train_model, compile_model
 from google.cloud import storage
 from gallery.params import *
@@ -8,10 +8,7 @@ def run():
     dataset_dir = os.path.join(os.path.expanduser(LOCAL_DATA_PATH),'train')
     val_dir = os.path.join(os.path.expanduser(LOCAL_DATA_PATH),'validation')
     if not os.path.exists(dataset_dir):
-<<<<<<< HEAD
         print("Started fetching the data")
-=======
->>>>>>> 05dbe082355522629d90ee34174ac562cc96976f
         initial_data = fetching_data()
         no_null_data = drop_nulls(initial_data)
         filtered_data, movements = filter_data(no_null_data)
@@ -20,7 +17,9 @@ def run():
         # Set the path to the directory containing your image dataset
 
         # Check and remove empty or invalid images
-    #check_and_remove_invalid_images(dataset_dir)
+    check_and_remove_invalid_images(dataset_dir)
+    check_and_remove_invalid_images(val_dir)
+    clean_faulty_images()
     dataset = image_gen(dataset_dir,BATCH_SIZE,IMG_HEIGHT,IMG_WIDTH)
 
     client = storage.Client(project=PROJECT_NAME)

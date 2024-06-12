@@ -6,6 +6,8 @@ from io import BytesIO
 import requests
 from gallery.params import *
 
+
+
 def fetching_data():
     client = bigquery.Client(project=PROJECT_NAME)
     full_table_name = f"{PROJECT_NAME}.{NODE_NAME}.{TABLE1_NAME}"
@@ -84,3 +86,63 @@ def save_to_dir(full_df):
             img.save(os.path.join(save_dir, os.path.basename(url)))
     except Exception as e:
         print(f"Exception occurred while processing URL {url}: {e}")
+
+
+corrupt_images = [
+    os.path.join(LOCAL_DATA_PATH, "train/abstract_art/biblioteca.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/art_nouveau_modern/thecompellingreason1898.jpg"
+    ),
+    os.path.join(LOCAL_DATA_PATH, "train/art_nouveau_modern/unknown1909.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/art_nouveau_modern/vernicleandsaintprinces1910.jpg"
+    ),
+    os.path.join(LOCAL_DATA_PATH, "train/baroque/afarewelltodidoaeneas.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/baroque/christraisesjairus.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/early_renaissance/portraitofgiovannatornabuoni.jpg"
+    ),
+    os.path.join(LOCAL_DATA_PATH, "train/expressionism/villagestreet.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/high_renaissance/anoblemanonabalcony1525.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/impressionism/asummersday.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/impressionism/dancersinpink1885.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/mannerism_late_renaissance/portraitofacollector1565.jpg"
+    ),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/mannerism_late_renaissance/portraitofaman2.jpg"
+    ),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/nave_art_primitivism/illustrationtochadgadya1919.jpg"
+    ),
+    os.path.join(LOCAL_DATA_PATH, "train/northern_renaissance/mountainrange1530.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/postimpressionism/thebath1908.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/realism/henrirochefort1.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/realism/sarahhearsandlaughs.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/romanticism/portraitoffordmadoxbrown1852.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/romanticism/portraitofivankrylovandanunknownwoman.jpg"
+    ),
+    os.path.join(
+        LOCAL_DATA_PATH, "train/surrealism/blindminotaurisguidedbygirl1934.jpg"
+    ),
+    os.path.join(LOCAL_DATA_PATH, "train/surrealism/womanwithhat19621.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/symbolism/buddhastest1927.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/symbolism/isaacfeelsjacobasrebekah.jpg"),
+    os.path.join(LOCAL_DATA_PATH, "train/ukiyoe/uponmyoath.jpg"),
+    os.path.join(
+        LOCAL_DATA_PATH, "validation/impressionism/theboatyardatsaintmammes1886.jpg"
+    ),
+    os.path.join(
+        LOCAL_DATA_PATH, "validation/surrealism/womanwithyellowhatjacqueline.jpg"
+    ),
+]
+
+
+def clean_faulty_images():
+    for image_path in corrupt_images:
+        try:
+            os.remove(image_path)
+            print(f"Removed {image_path}")
+        except OSError as e:
+            print(f"Error removing {image_path}: {e}")
