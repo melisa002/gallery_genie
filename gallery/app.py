@@ -101,20 +101,18 @@ img_file_buffer = st.file_uploader('', type=['png', 'jpg', 'jpeg'])
 st.markdown('</div>', unsafe_allow_html=True)
 
 if img_file_buffer is not None:
-    col1, col2 = st.columns(2)
-    st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded &#128070;")
+    col1, col2, col3, col4 = st.columns(4)
+    st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded 👆;")
     with st.spinner("Wait for it..."):
         # Get bytes from the file buffer
         img_bytes = img_file_buffer.getvalue()
-
         # Make request to API
         try:
             res = requests.post(url + "/upload_image", files={'img': img_bytes})
-
             if res.status_code == 200:
                 prediction = res.json()
                 st.write(f'The style of this image is {prediction["pred_label"]}!')
-
+                st.write(prediction)
                 # Mock recommendation function
                 def get_recommendations(image):
                     return [
@@ -126,6 +124,8 @@ if img_file_buffer is not None:
                 recommendations = get_recommendations(img_bytes)
                 st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
                 st.markdown('<div class="recommendations">', unsafe_allow_html=True)
+                with col1:
+                    st.write(prediction["pred_label"])
                 for recommendation in recommendations:
                     st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
@@ -139,4 +139,3 @@ else:
     st.markdown('<div class="white-text">Please upload an image to get started.</div>', unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown('<div class="footer">Developed with :heart: using Streamlit, FastAPI, and Docker.</div>', unsafe_allow_html=True)
