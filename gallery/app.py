@@ -112,7 +112,7 @@ if img_file_buffer is not None:
             if res.status_code == 200:
                 prediction = res.json()
                 st.write(f'The style of this image is {prediction["pred_label"]}!')
-                st.write(prediction)
+                #st.write(prediction)
                 # Mock recommendation function
                 def get_recommendations(image):
                     return [
@@ -125,7 +125,7 @@ if img_file_buffer is not None:
                 st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
                 st.markdown('<div class="recommendations">', unsafe_allow_html=True)
                 with col1:
-                    st.write(prediction["pred_label"])
+                    st.image(prediction["most_similar"][0]['url'])
                 for recommendation in recommendations:
                     st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
