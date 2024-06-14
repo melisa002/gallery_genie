@@ -124,8 +124,7 @@ if img_file_buffer is not None:
                 recommendations = get_recommendations(img_bytes)
                 st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
                 st.markdown('<div class="recommendations">', unsafe_allow_html=True)
-                with col1:
-                    st.image(prediction["most_similar"][0]['url'])
+                st.image(prediction["most_similar"][0]['url'])
                 for recommendation in recommendations:
                     st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
