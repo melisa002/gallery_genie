@@ -1,0 +1,68 @@
+<style>
+        body {
+            background-color: #F0F2F6;
+        }
+        .main {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            color: #333333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .stSpinner {
+            color: #FF4B4B;
+        }
+        .header-text1 {
+            background-color: #FF4B4B;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 3em;
+            padding: 0.5em;
+            border-radius: 10px;
+            margin-bottom: 1em;
+        }
+        .header-text {
+            text-align: center;
+            color: #333333;
+            font-size: 2em;
+            margin-top: 1em;
+        }
+        .subheader-text {
+            text-align: center;
+            color: #333333;
+            font-size: 1.5em;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+        .markdown-text {
+            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #000000;
+            margin-top: 2rem;
+        }
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+        .recommendations {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .recommendation-item {
+            background-color: #f9f9f9;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+            padding: 1em;
+            margin: 0.5em;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }

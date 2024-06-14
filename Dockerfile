@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 #FROM python:3.10-buster
 #FROM ultralytics/ultralytics:latest
 #COPY setup.py setup.py
@@ -12,6 +14,7 @@
 #COPY gcp gcp/
 #CMD python gallery/train_yolo.py
 
+>>>>>>> 970cb2faf88be19f1a06c7b9f28ece8510709df7
 FROM python:3.10
 RUN apt-get update
 RUN apt-get install \

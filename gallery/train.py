@@ -36,7 +36,7 @@ def image_gen(dataset_dir,batch_size,img_height,img_width):
         labels='inferred',         # Optional: Infer class labels automatically from subdirectories
         label_mode='categorical',  # Optional: Set label mode, e.g., 'binary', 'categorical', 'sparse'
         interpolation='bilinear',  # Optional: Specify the interpolation method for resizing images
-        pad_to_aspect_ratio=False
+
     )
     return dataset
 
@@ -62,7 +62,9 @@ def compile_model(model):
     return model
 
 def train_model(model,dataset,dataset_val):
-    model.fit(dataset,validation_data=dataset_val, epochs=3)
+    train_dataset = dataset.batch(BATCH_SIZE)
+    validation_dataset = dataset_val.batch(BATCH_SIZE)
+    model.fit(train_dataset,validation_data=validation_dataset, epochs=1)
     save_model(model)
     return model
 

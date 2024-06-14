@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+from gallery.data import fetching_data, drop_nulls,filter_data,sample_images,save_to_dir, check_and_remove_invalid_images, clean_faulty_images
+from gallery.train import image_gen, create_model, train_model, compile_model
+=======
 from gallery.data import fetching_data, drop_nulls,filter_data,sample_images,save_to_dir, check_and_remove_invalid_images
 from gallery.train import image_gen, create_model, train_model, compile_model, load_and_preprocess_image, extract_features, compare_images, find_most_similar_image
+>>>>>>> 970cb2faf88be19f1a06c7b9f28ece8510709df7
 from google.cloud import storage
 from gallery.params import *
 from gallery.registry import load_model
@@ -19,8 +24,13 @@ def run():
         # Check and remove empty or invalid images
     check_and_remove_invalid_images(dataset_dir)
     check_and_remove_invalid_images(val_dir)
+<<<<<<< HEAD
+    clean_faulty_images()
+=======
 
+>>>>>>> 970cb2faf88be19f1a06c7b9f28ece8510709df7
     dataset = image_gen(dataset_dir,BATCH_SIZE,IMG_HEIGHT,IMG_WIDTH)
+    val_dataset = image_gen(val_dir,BATCH_SIZE,IMG_HEIGHT,IMG_WIDTH)
 
 
 
@@ -35,12 +45,20 @@ def run():
         model = create_model()
         print("Model Created")
     model = compile_model(model)
-    trained_model = train_model(model,dataset,val_dir)
+    trained_model = train_model(model,dataset,val_dataset)
     return trained_model
 
+<<<<<<< HEAD
+def load_model_weights():
+    model = create_model()
+    model1= compile_model(model)
+    mod = model1.load_weights('/Users/franciscocarassus/code/melisa002/models/models_20240612-141510.weights.h5')
+    return mod
+=======
 #def reccommend():
     #img_array = load_and_preprocess_image()
 
+>>>>>>> 970cb2faf88be19f1a06c7b9f28ece8510709df7
 
 if __name__ == '__main__':
     run()

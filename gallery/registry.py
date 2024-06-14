@@ -7,6 +7,7 @@ from gallery.params import *
 
 def save_model(model:keras.Model = None) -> None:
     timestamp = time.strftime("%Y%m%d-%H%M%S")
+    os.makedirs(os.path.join(MODEL_REGISTRY,'models'))
 
     model_path = os.path.join(MODEL_REGISTRY,'models',f"{timestamp}.h5")
     model.save_weights(model_path)
