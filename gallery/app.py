@@ -94,42 +94,40 @@ img_file_buffer = st.file_uploader('', type=['png', 'jpg', 'jpeg'])
 st.markdown('</div>', unsafe_allow_html=True)
 if img_file_buffer is not None:
     col1, col2 = st.columns(2)
-    with col1:
+    st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded :point_up:")
         # Display the image user uploaded
-        st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded :point_up:")
-    with col2:
-        with st.spinner("Wait for it..."):
-            # Get bytes from the file buffer
-            img_bytes = img_file_buffer.getvalue()
-            # Make request to API (stream=True to stream response as bytes)
-            try:
-                res = requests.post(url + "/upload_image", files={'img': img_bytes})
+    with st.spinner("Wait for it..."):
+        # Get bytes from the file buffer
+        img_bytes = img_file_buffer.getvalue()
+        # Make request to API (stream=True to stream response as bytes)
+        try:
+            res = requests.post(url + "/upload_image", files={'img': img_bytes})
 
-                if res.status_code == 200:
-                    # Display the image returned by the API
-                    prediction = res.json()
-                    #st.write(prediction)
-                    st.write(f'The style of this image is {prediction["pred_label"]}!')
-                    # Mock recommendation function (replace this with actual API call or local function)
-                    def get_recommendations(image):
-                        # Dummy data for example purposes
-                        return [
-                            "Recommendation 1: Similar item 1",
-                            "Recommendation 2: Similar item 2",
-                            "Recommendation 3: Similar item 3"
-                        ]
-                    recommendations = get_recommendations(img_bytes)
-                    st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
-                    st.markdown('<div class="recommendations">', unsafe_allow_html=True)
-                    for recommendation in recommendations:
-                        st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
-                    st.markdown('</div>', unsafe_allow_html=True)
-                else:
-                    st.error("**Oops**, something went wrong :sweat: Please try again.")
-                    st.write(f"Error {res.status_code}: {res.content.decode('utf-8')}")
-            except requests.exceptions.RequestException as e:
+            if res.status_code == 200:
+                # Display the image returned by the API
+                prediction = res.json()
+                #st.write(prediction)
+                st.write(f'The style of this image is {prediction["pred_label"]}!')
+                # Mock recommendation function (replace this with actual API call or local function)
+                def get_recommendations(image):
+                    # Dummy data for example purposes
+                    return [
+                        "Recommendation 1: Similar item 1",
+                        "Recommendation 2: Similar item 2",
+                        "Recommendation 3: Similar item 3"
+                    ]
+                recommendations = get_recommendations(img_bytes)
+                st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
+                st.markdown('<div class="recommendations">', unsafe_allow_html=True)
+                for recommendation in recommendations:
+                    st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            else:
                 st.error("**Oops**, something went wrong :sweat: Please try again.")
-                st.write(f"RequestException: {e}")
+                st.write(f"Error {res.status_code}: {res.content.decode('utf-8')}")
+        except requests.exceptions.RequestException as e:
+            st.error("**Oops**, something went wrong :sweat: Please try again.")
+            st.write(f"RequestException: {e}")
 else:
     # Change text color to white for info message
     st.markdown('<div class="white-text">Please upload an image to get started.</div>', unsafe_allow_html=True)
