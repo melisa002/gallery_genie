@@ -99,6 +99,8 @@ st.markdown("""
         .center-button {
             display: flex;
             justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1em;
         }
         .stButton>button {
             font-size: 1.2em;
