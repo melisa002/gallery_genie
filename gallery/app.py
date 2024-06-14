@@ -9,7 +9,10 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-url = 'https://gallery-5jwtgfgjta-ew.a.run.app'
+# Example local Docker container URL
+url = 'http://api:8000'
+# Example localhost development URL
+# url = 'http://localhost:8000'
 # load_dotenv()
 # url = os.getenv('API_URL')
 
@@ -68,7 +71,7 @@ st.markdown("""
             align-items: center;
         }
         .recommendation-item {
-            background-color: #f9f9f9;
+            background-color: #F9F9F9;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 1em;
@@ -79,19 +82,19 @@ st.markdown("""
         }
         /* CSS for white text */
     .white-text {
-        color: #FFFFFF;
-        background-color: #b0e3e8; /* Light blue background */
+        color: ##b3b6bd;
+       /* Light blue background */
         border-radius: 10px;
-        padding: 1.5em; /* Increased padding */
-        margin: 1em 0; /* Increased margin */
-        text-align: center; /* Center align text */
+        font-size: 0.8em;
+
+
     """, unsafe_allow_html=True)
 
 # App title and description
 st.markdown('<div class="header-text1">GALLERY GENIE</div>', unsafe_allow_html=True)
-st.markdown('<div class="header-text">Image Uploader & Recommender 📷</div>', unsafe_allow_html=True)
+st.markdown('<div class="header-text">Image Uploader & Recommender :camera:</div>', unsafe_allow_html=True)
 st.markdown('<br>', unsafe_allow_html=True)  # Add space between lines
-st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations 👇</div>', unsafe_allow_html=True)
+st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations :point_down:</div>', unsafe_allow_html=True)
 
 # File upload section
 st.markdown('<div class="upload-section">', unsafe_allow_html=True)
@@ -109,9 +112,8 @@ if img_file_buffer is not None:
             img_bytes = img_file_buffer.getvalue()
             # Make request to API (stream=True to stream response as bytes)
             try:
-                st.write(url)
                 res = requests.post(url + "/upload_image", files={'img': img_bytes})
-
+                st.write(res)
                 if res.status_code == 200:
                     # Display the image returned by the API
                     prediction = res.json()
@@ -143,4 +145,3 @@ else:
     st.markdown('<div class="white-text">Please upload an image to get started.</div>', unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown('<div class="footer">Developed with :heart: using Streamlit, FastAPI, and Docker.</div>', unsafe_allow_html=True)
