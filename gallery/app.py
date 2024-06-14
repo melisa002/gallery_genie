@@ -128,8 +128,9 @@ if img_file_buffer is not None:
                 st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
 
                 col1, col2 = st.columns(2)
+
                 with col1:
-                    st.image(prediction["most_similar"][0]['url'], use_column_width=True)
+                    st.button(st.image(prediction["most_similar"][0]['url'], use_column_width=True))
                     st.image(prediction["most_similar"][1]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][4]['url'], use_column_width=True)
                 with col2:
