@@ -129,20 +129,33 @@ if img_file_buffer is not None:
 
                 with col1:
                     st.image(prediction["most_similar"][0]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][0]['painting_name'])
+                    button1 = st.button(prediction["most_similar"][0]['painting_name'])
                     st.image(prediction["most_similar"][1]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][1]['painting_name'])
+                    button2 = st.button(prediction["most_similar"][1]['painting_name'])
                     st.image(prediction["most_similar"][4]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][4]['painting_name'])
+                    button3 = st.button(prediction["most_similar"][4]['painting_name'])
                 with col2:
                     st.image(prediction["most_similar"][2]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][2]['painting_name'])
+                    button4 = st.button(prediction["most_similar"][2]['painting_name'])
                     st.image(prediction["most_similar"][3]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][3]['painting_name'])
+                    button5 = st.button(prediction["most_similar"][3]['painting_name'])
                     st.image(prediction["most_similar"][5]['url'], use_column_width=True)
-                    st.button(prediction["most_similar"][5]['painting_name'])
+                    button6 = st.button(prediction["most_similar"][5]['painting_name'])
 
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+                index_ = 6
+                if button1:
+                    index_ = 0
+                elif button2:
+                    index_ = 1
+                elif button3:
+                    index_ = 2
+                elif button4:
+                    index_ = 3
+                elif button5:
+                    index_ = 4
+                elif button6:
+                    index_ = 5
 
                 def get_details(name,author_name):
                     prompt = f"Give a short, 4 line description about the picture {name} from {author_name} and focus on history and meaning. Explain a bit about the author's style and provide a location if you know."
@@ -157,7 +170,7 @@ if img_file_buffer is not None:
                             response_text += chunk.choices[0].delta.content
                     return response_text.strip()
 
-                details = get_details(prediction["most_similar"][0]['painting_name'],prediction["most_similar"][0]['author_name'])
+                details = get_details(prediction["most_similar"][index_]['painting_name'],prediction["most_similar"][index_]['author_name'])
                 st.write(details)
 
             else:
