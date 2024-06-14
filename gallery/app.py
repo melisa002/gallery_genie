@@ -114,7 +114,7 @@ if img_file_buffer is not None:
             if res.status_code == 200:
                 prediction = res.json()
                 st.write(f'The style of this image is {prediction["pred_label"]}!')
-                st.write(prediction)
+                #st.write(prediction)
                 # Mock recommendation function
                 def get_recommendations(image):
                     return [
