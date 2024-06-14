@@ -114,7 +114,7 @@ if img_file_buffer is not None:
             if res.status_code == 200:
                 prediction = res.json()
                 st.write(f'The style of this image is {prediction["pred_label"]}!')
-
+                st.write(prediction)
                 # Mock recommendation function
                 def get_recommendations(image):
                     return [
@@ -139,8 +139,8 @@ if img_file_buffer is not None:
 
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-                def get_details(name):
-                    prompt = f"Give a short, 4 line description about the picture {name} and focus on history and meaning."
+                def get_details(name,author_name):
+                    prompt = f"Give a short, 4 line description about the picture {name} from {author_name} and focus on history and meaning. Expalain a bit about the author's style and provide a location if you know."
                     stream = client.chat.completions.create(
                         model="gpt-3.5-turbo",
                         messages=[{"role": "user", "content": prompt}],
@@ -152,8 +152,8 @@ if img_file_buffer is not None:
                             response_text += chunk.choices[0].delta.content
                     return response_text.strip()
 
-                details = get_details('A starry night')
-                st.write(details)
+                #details = get_details(prediction["most_similar"][0]['name'])
+                #st.write(details)
 
             else:
                 st.error("**Oops**, something went wrong :sweat: Please try again.")
