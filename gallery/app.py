@@ -91,10 +91,26 @@ st.markdown("""
             font-size: 1.8em;
             margin-top: 1em;
             margin-bottom: 1em;
-            color: #FF4B4B;
-            background-color: #FFF4F4;
+            color: #4CAF50;
+            background-color: #F4FFF4;
             padding: 1em;
             border-radius: 10px;
+        }
+        .center-button {
+            display: flex;
+            justify-content: center;
+        }
+        .stButton>button {
+            font-size: 1.2em;
+            background-color: #FF4B4B;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .stButton>button:hover {
+            background-color: #FF6666;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -125,7 +141,9 @@ if img_file_buffer is not None:
                 prediction = res.json()
                 st.markdown(f'<div class="prediction-text">The style of this image is {prediction["pred_label"]}!</div>', unsafe_allow_html=True)
 
+                st.markdown('<div class="center-button">', unsafe_allow_html=True)
                 but = st.button('Press me to get predictions!')
+                st.markdown('</div>', unsafe_allow_html=True)
 
                 if but:
                     # Mock recommendation function
