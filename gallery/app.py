@@ -109,7 +109,9 @@ if img_file_buffer is not None:
             img_bytes = img_file_buffer.getvalue()
             # Make request to API (stream=True to stream response as bytes)
             try:
+                st.write(url)
                 res = requests.post(url + "/upload_image", files={'img': img_bytes})
+
                 if res.status_code == 200:
                     # Display the image returned by the API
                     prediction = res.json()
