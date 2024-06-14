@@ -130,9 +130,11 @@ if img_file_buffer is not None:
                 with col1:
                     st.image(prediction["most_similar"][0]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][1]['url'], use_column_width=True)
+                    st.image(prediction["most_similar"][4]['url'], use_column_width=True)
                 with col2:
                     st.image(prediction["most_similar"][2]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][3]['url'], use_column_width=True)
+                    st.image(prediction["most_similar"][5]['url'], use_column_width=True)
 
             else:
                 st.error("**Oops**, something went wrong :sweat: Please try again.")
