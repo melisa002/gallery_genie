@@ -60,6 +60,6 @@ def compile_model(model):
 def train_model(model,dataset,dataset_val):
     train_dataset = dataset.batch(BATCH_SIZE)
     validation_dataset = dataset_val.batch(BATCH_SIZE)
-    model.fit(train_dataset,validation_data=validation_dataset, epochs=3)
+    model.fit(train_dataset,validation_data=validation_dataset, epochs=1)
     save_model(model)
     return model

@@ -21,6 +21,7 @@ def run():
     check_and_remove_invalid_images(val_dir)
     clean_faulty_images()
     dataset = image_gen(dataset_dir,BATCH_SIZE,IMG_HEIGHT,IMG_WIDTH)
+    val_dataset = image_gen(val_dir,BATCH_SIZE,IMG_HEIGHT,IMG_WIDTH)
 
     client = storage.Client(project=PROJECT_NAME)
     bucket = client.bucket(BUCKET_NAME)
@@ -33,8 +34,14 @@ def run():
         model = create_model()
         print("Model Created")
     model = compile_model(model)
-    trained_model = train_model(model,dataset,val_dir)
+    trained_model = train_model(model,dataset,val_dataset)
     return trained_model
+
+def load_model_weights():
+    model = create_model()
+    model1= compile_model(model)
+    mod = model1.load_weights('/Users/franciscocarassus/code/melisa002/models/models_20240612-141510.weights.h5')
+    return mod
 
 if __name__ == '__main__':
     run()
