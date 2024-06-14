@@ -47,9 +47,10 @@ def train_model(epochs: int = 10, img_size: int = 256):
 
     # Train the model
     model.train(
+        batch= BATCH_SIZE,
         data=LOCAL_DATA_PATH,
         epochs=epochs,
-        imgsz=img_size,
+        imgsz=IMG_HEIGHT,
         patience=20,
         #device='mps' #
     )

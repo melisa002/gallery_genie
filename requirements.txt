@@ -10,3 +10,6 @@ scikit-learn
 ipdb
 ultralytics
 comet_ml
+fastapi
+streamlit
+faiss-cpu

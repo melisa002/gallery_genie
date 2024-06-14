@@ -9,6 +9,9 @@ __pycache__/
 *.zip
 gcp/
 *.pt
+*.bin
+*.csv
+data_similarity/
 # Distribution / packaging
 .Python
 build/
