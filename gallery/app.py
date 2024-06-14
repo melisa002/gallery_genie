@@ -144,7 +144,6 @@ if img_file_buffer is not None:
                 st.markdown(f'<div class="prediction-text">The style of this image is {prediction["pred_label"]}!</div>', unsafe_allow_html=True)
 
                 st.markdown('<div class="center-button">', unsafe_allow_html=True)
-                but = st.button('Press me to get predictions!')
                 st.markdown('</div>', unsafe_allow_html=True)
 
 
