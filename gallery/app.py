@@ -18,10 +18,8 @@ url = 'https://gallery-5jwtgfgjta-ew.a.run.app'
 st.markdown("""
     <style>
         body {
-            background-color: #F0F2F6;
         }
         .main {
-            background-color: #FFFFFF;
             padding: 2rem;
             color: #333333;
             border-radius: 10px;
