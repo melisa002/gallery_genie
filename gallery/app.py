@@ -125,6 +125,9 @@ if img_file_buffer is not None:
                 st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
                 st.markdown('<div class="recommendations">', unsafe_allow_html=True)
                 st.image(prediction["most_similar"][0]['url'])
+                st.image(prediction["most_similar"][1]['url'])
+                st.image(prediction["most_similar"][2]['url'])
+                st.image(prediction["most_similar"][3]['url'])
                 for recommendation in recommendations:
                     st.markdown(f'<div class="recommendation-item">{recommendation}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
