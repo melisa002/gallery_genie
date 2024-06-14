@@ -96,7 +96,7 @@ if img_file_buffer is not None:
     col1, col2 = st.columns(2)
     with col1:
         # Display the image user uploaded
-        st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded :point_up:", use_column_width=True)
+        st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded :point_up:")
     with col2:
         with st.spinner("Wait for it..."):
             # Get bytes from the file buffer
@@ -109,7 +109,7 @@ if img_file_buffer is not None:
                     # Display the image returned by the API
                     prediction = res.json()
                     #st.write(prediction)
-                    st.write(f'The style of this image is {prediction["pred_label"]}')
+                    st.write(f'The style of this image is {prediction["pred_label"]}!')
                     # Mock recommendation function (replace this with actual API call or local function)
                     def get_recommendations(image):
                         # Dummy data for example purposes
