@@ -92,7 +92,8 @@ st.markdown("""
 st.markdown('<div class="header-text1">GALLERY GENIE</div>', unsafe_allow_html=True)
 st.markdown('<div class="header-text">Image Uploader & Recommender &#128247;</div>', unsafe_allow_html=True)
 st.markdown('<br>', unsafe_allow_html=True)
-st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations :point_down:</div>', unsafe_allow_html=True)
+st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations &#128071;</div>', unsafe_allow_html=True)
+
 
 # File upload section
 st.markdown('<div class="upload-section">', unsafe_allow_html=True)
@@ -101,8 +102,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 if img_file_buffer is not None:
     col1, col2 = st.columns(2)
-    st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded :point_up:")
-
+    st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded &#128070;")
     with st.spinner("Wait for it..."):
         # Get bytes from the file buffer
         img_bytes = img_file_buffer.getvalue()
