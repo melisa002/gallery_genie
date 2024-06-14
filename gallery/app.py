@@ -104,11 +104,12 @@ if img_file_buffer is not None:
             # Make request to API (stream=True to stream response as bytes)
             try:
                 res = requests.post(url + "/upload_image", files={'img': img_bytes})
-                st.write(res)
+
                 if res.status_code == 200:
                     # Display the image returned by the API
                     prediction = res.json()
-                    st.write(prediction)
+                    #st.write(prediction)
+                    st.write(prediction["pred_label"])
                     # Mock recommendation function (replace this with actual API call or local function)
                     def get_recommendations(image):
                         # Dummy data for example purposes
