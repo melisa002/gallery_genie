@@ -90,7 +90,7 @@ st.markdown("""
 
 # App title and description
 st.markdown('<div class="header-text1">GALLERY GENIE</div>', unsafe_allow_html=True)
-st.markdown('<div class="header-text">Image Uploader & Recommender :camera:</div>', unsafe_allow_html=True)
+st.markdown('<div class="header-text">Image Uploader & Recommender &#128247;</div>', unsafe_allow_html=True)
 st.markdown('<br>', unsafe_allow_html=True)
 st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations :point_down:</div>', unsafe_allow_html=True)
 
