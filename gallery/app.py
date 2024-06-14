@@ -137,7 +137,7 @@ if img_file_buffer is not None:
                     st.image(prediction["most_similar"][3]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][5]['url'], use_column_width=True)
 
-                client = OpenAI(api_key=st.secrets["OPENAI_KEY"])
+                client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
                 def get_details(name):
                     prompt = f"Give a short, 4 line description about the picture {name} and focus on history and meaning."
