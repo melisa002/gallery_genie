@@ -93,10 +93,6 @@ st.markdown('<div class="header-text">Image Uploader & Recommender &#128247;</di
 st.markdown('<br>', unsafe_allow_html=True)
 st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations &#128071;</div>', unsafe_allow_html=True)
 
-# Initialize session state for button clicks
-if "button_clicked" not in st.session_state:
-    st.session_state.button_clicked = None
-
 # File upload section
 st.markdown('<div class="upload-section">', unsafe_allow_html=True)
 img_file_buffer = st.file_uploader('', type=['png', 'jpg', 'jpeg'])
@@ -128,7 +124,7 @@ if img_file_buffer is not None:
 
                 but = st.button('Press me to get predictions!')
 
-                if but or st.session_state.button_clicked is not None:
+                if but:
 
                     recommendations = get_recommendations(img_bytes)
                     st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
@@ -152,33 +148,35 @@ if img_file_buffer is not None:
 
                     client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
                     index_ = 6
-
                     if button1:
-                        st.session_state.button_clicked = 0
+                        index_ = 0
                     elif button2:
-                        st.session_state.button_clicked = 1
+                        index_ = 1
                     elif button3:
-                        st.session_state.button_clicked = 4
+                        index_ = 2
                     elif button4:
-                        st.session_state.button_clicked = 2
+                        index_ = 3
                     elif button5:
-                        st.session_state.button_clicked = 3
+                        index_ = 4
                     elif button6:
-                        st.session_state.button_clicked = 5
+                        index_ = 5
 
-                    def get_details(name, author_name):
+                    def get_details(name,author_name):
                         prompt = f"Give a short, 4 line description about the picture {name} from {author_name} and focus on history and meaning. Explain a bit about the author's style and provide a location if you know."
-                        response = client.Completion.create(
+                        stream = client.chat.completions.create(
                             model="gpt-3.5-turbo",
                             messages=[{"role": "user", "content": prompt}],
+                            stream=True,
                         )
-                        response_text = response.choices[0].text
+                        response_text = ""
+                        for chunk in stream:
+                            if chunk.choices[0].delta.content is not None:
+                                response_text += chunk.choices[0].delta.content
                         return response_text.strip()
 
-                    if st.session_state.button_clicked is not None:
-                        index_ = st.session_state.button_clicked
-                        details = get_details(prediction["most_similar"][index_]['painting_name'], prediction["most_similar"][index_]['author_name'])
-                        st.write(details)
+
+                    details = get_details(prediction["most_similar"][index_]['painting_name'],prediction["most_similar"][index_]['author_name'])
+                    st.write(details)
 
             else:
                 st.error("**Oops**, something went wrong :sweat: Please try again.")
