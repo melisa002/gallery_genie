@@ -1,21 +1,15 @@
 import streamlit as st
 from PIL import Image
 import requests
-
 st.set_page_config(
     page_title="Image Uploader & Recommender",
     page_icon=':frame_with_picture:',
     layout="wide",
     initial_sidebar_state="expanded",
 )
-
-# Example local Docker container URL
-url = 'http://api:8000'
-# Example localhost development URL
-# url = 'http://localhost:8000'
+url = 'https://gallery-5jwtgfgjta-ew.a.run.app'
 # load_dotenv()
 # url = os.getenv('API_URL')
-
 # Custom CSS
 st.markdown("""
     <style>
@@ -82,25 +76,22 @@ st.markdown("""
         }
         /* CSS for white text */
     .white-text {
-        color: ##b3b6bd;
-       /* Light blue background */
+        color: #FFFFFF;
+        background-color: #B0E3E8; /* Light blue background */
         border-radius: 10px;
-        font-size: 0.8em;
-
-
+        padding: 1.5em; /* Increased padding */
+        margin: 1em 0; /* Increased margin */
+        text-align: center; /* Center align text */
     """, unsafe_allow_html=True)
-
 # App title and description
 st.markdown('<div class="header-text1">GALLERY GENIE</div>', unsafe_allow_html=True)
 st.markdown('<div class="header-text">Image Uploader & Recommender :camera:</div>', unsafe_allow_html=True)
 st.markdown('<br>', unsafe_allow_html=True)  # Add space between lines
 st.markdown('<div class="markdown-text">Let\'s do a simple painting recognition and get recommendations :point_down:</div>', unsafe_allow_html=True)
-
 # File upload section
 st.markdown('<div class="upload-section">', unsafe_allow_html=True)
 img_file_buffer = st.file_uploader('', type=['png', 'jpg', 'jpeg'])
 st.markdown('</div>', unsafe_allow_html=True)
-
 if img_file_buffer is not None:
     col1, col2 = st.columns(2)
     with col1:
@@ -118,7 +109,6 @@ if img_file_buffer is not None:
                     # Display the image returned by the API
                     prediction = res.json()
                     st.write(prediction)
-
                     # Mock recommendation function (replace this with actual API call or local function)
                     def get_recommendations(image):
                         # Dummy data for example purposes
@@ -127,7 +117,6 @@ if img_file_buffer is not None:
                             "Recommendation 2: Similar item 2",
                             "Recommendation 3: Similar item 3"
                         ]
-
                     recommendations = get_recommendations(img_bytes)
                     st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
                     st.markdown('<div class="recommendations">', unsafe_allow_html=True)
@@ -143,5 +132,5 @@ if img_file_buffer is not None:
 else:
     # Change text color to white for info message
     st.markdown('<div class="white-text">Please upload an image to get started.</div>', unsafe_allow_html=True)
-
 st.markdown("---")
+st.markdown('<div class="footer">Developed with :heart: using Streamlit, FastAPI, and Docker.</div>', unsafe_allow_html=True)
