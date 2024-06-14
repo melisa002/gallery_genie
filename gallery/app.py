@@ -88,10 +88,13 @@ st.markdown("""
         }
         .prediction-text {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.8em;
             margin-top: 1em;
             margin-bottom: 1em;
             color: #FF4B4B;
+            background-color: #FFF4F4;
+            padding: 1em;
+            border-radius: 10px;
         }
     </style>
 """, unsafe_allow_html=True)
