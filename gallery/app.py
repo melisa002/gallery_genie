@@ -109,7 +109,7 @@ if img_file_buffer is not None:
                     # Display the image returned by the API
                     prediction = res.json()
                     #st.write(prediction)
-                    st.write(prediction["pred_label"])
+                    st.write(f'The style of this image is {prediction["pred_label"]}')
                     # Mock recommendation function (replace this with actual API call or local function)
                     def get_recommendations(image):
                         # Dummy data for example purposes
