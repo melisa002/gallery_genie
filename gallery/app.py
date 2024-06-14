@@ -133,16 +133,16 @@ if img_file_buffer is not None:
                     st.image(prediction["most_similar"][0]['url'], use_column_width=True)
                     st.button(prediction["most_similar"][0]['painting_name'])
                     st.image(prediction["most_similar"][1]['url'], use_column_width=True)
-                    prediction["most_similar"][1]['painting_name']
+                    st.button(prediction["most_similar"][1]['painting_name'])
                     st.image(prediction["most_similar"][4]['url'], use_column_width=True)
-                    prediction["most_similar"][4]['painting_name']
+                    st.button(prediction["most_similar"][4]['painting_name'])
                 with col2:
                     st.image(prediction["most_similar"][2]['url'], use_column_width=True)
-                    prediction["most_similar"][2]['painting_name']
+                    st.button(prediction["most_similar"][2]['painting_name'])
                     st.image(prediction["most_similar"][3]['url'], use_column_width=True)
-                    prediction["most_similar"][3]['painting_name']
+                    st.button(prediction["most_similar"][3]['painting_name'])
                     st.image(prediction["most_similar"][5]['url'], use_column_width=True)
-                    prediction["most_similar"][5]['painting_name']
+                    st.button(prediction["most_similar"][5]['painting_name'])
 
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
