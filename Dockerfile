@@ -18,12 +18,13 @@ RUN apt-get install \
   'ffmpeg'\
   'libsm6'\
   'libxext6'  -y
+RUN apt-get update && apt-get install -y libhdf5-dev
+RUN pip install --no-binary h5py h5py
 COPY gallery gallery
-COPY data data
 COPY gcp gcp
-COPY requirements.ultralytics.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install -U pip
 RUN pip install -r requirements.txt
 COPY setup.py setup.py
 RUN pip install -e .
-CMD python gallery/train_yolo.py
+CMD uvicorn gallery.api:app --host 0.0.0.0 --port $PORT

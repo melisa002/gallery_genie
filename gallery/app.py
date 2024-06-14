@@ -10,10 +10,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-# Example local Docker container URL
-url = 'http://api:8000'
-# Example localhost development URL
-url = 'http://localhost:8000'
+
+url = 'https://gallery-5jwtgfgjta-ew.a.run.app'
 # load_dotenv()
 # url = os.getenv('API_URL')
 # Custom CSS
