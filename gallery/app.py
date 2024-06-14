@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import requests
+from openai import OpenAI
 
 # Page configuration
 st.set_page_config(
@@ -135,6 +136,24 @@ if img_file_buffer is not None:
                     st.image(prediction["most_similar"][2]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][3]['url'], use_column_width=True)
                     st.image(prediction["most_similar"][5]['url'], use_column_width=True)
+
+                client = OpenAI(api_key=st.secrets["OPENAI_KEY"])
+
+                def get_details(name):
+                    prompt = f"Give a short, 4 line description about the picture {name} and focus on history and meaning."
+                    stream = client.chat.completions.create(
+                        model="gpt-3.5-turbo",
+                        messages=[{"role": "user", "content": prompt}],
+                        stream=True,
+                    )
+                    response_text = ""
+                    for chunk in stream:
+                        if chunk.choices[0].delta.content is not None:
+                            response_text += chunk.choices[0].delta.content
+                    return response_text.strip()
+
+                details = get_details('A starry night')
+                st.write(details)
 
             else:
                 st.error("**Oops**, something went wrong :sweat: Please try again.")
