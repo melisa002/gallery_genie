@@ -18,6 +18,7 @@ url = 'https://gallery-5jwtgfgjta-ew.a.run.app'
 st.markdown("""
     <style>
         body {
+            font-family: 'Arial', sans-serif;
         }
         .main {
             padding: 2rem;
@@ -45,13 +46,13 @@ st.markdown("""
             margin-bottom: 0.5em;
         }
         .markdown-text {
-            font-size: 1.1em;
+            font-size: 1.5em;
             text-align: center;
             margin-bottom: 2em;
         }
         .footer {
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1em;
             color: #888888;
             margin-top: 2rem;
         }
@@ -83,6 +84,14 @@ st.markdown("""
             padding: 1.5em;
             margin: 1em 0;
             text-align: center;
+            font-size: 1.2em;
+        }
+        .prediction-text {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            color: #FF4B4B;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -111,20 +120,19 @@ if img_file_buffer is not None:
 
             if res.status_code == 200:
                 prediction = res.json()
-                st.write(f'The style of this image is {prediction["pred_label"]}!')
-                #st.write(prediction)
-                # Mock recommendation function
-                def get_recommendations(image):
-                    return [
-                        "Recommendation 1: Similar item 1",
-                        "Recommendation 2: Similar item 2",
-                        "Recommendation 3: Similar item 3",
-                        "Recommendation 4: Similar item 4"
-                    ]
+                st.markdown(f'<div class="prediction-text">The style of this image is {prediction["pred_label"]}!</div>', unsafe_allow_html=True)
 
                 but = st.button('Press me to get predictions!')
 
                 if but:
+                    # Mock recommendation function
+                    def get_recommendations(image):
+                        return [
+                            "Recommendation 1: Similar item 1",
+                            "Recommendation 2: Similar item 2",
+                            "Recommendation 3: Similar item 3",
+                            "Recommendation 4: Similar item 4"
+                        ]
 
                     recommendations = get_recommendations(img_bytes)
                     st.markdown('<div class="header-text">Recommended Items Based on Your Image:</div>', unsafe_allow_html=True)
@@ -161,7 +169,7 @@ if img_file_buffer is not None:
                     elif button6:
                         index_ = 5
 
-                    def get_details(name,author_name):
+                    def get_details(name, author_name):
                         prompt = f"Give a short, 4 line description about the picture {name} from {author_name} and focus on history and meaning. Explain a bit about the author's style and provide a location if you know."
                         stream = client.chat.completions.create(
                             model="gpt-3.5-turbo",
@@ -174,8 +182,7 @@ if img_file_buffer is not None:
                                 response_text += chunk.choices[0].delta.content
                         return response_text.strip()
 
-
-                    details = get_details(prediction["most_similar"][index_]['painting_name'],prediction["most_similar"][index_]['author_name'])
+                    details = get_details(prediction["most_similar"][index_]['painting_name'], prediction["most_similar"][index_]['author_name'])
                     st.write(details)
 
             else:
