@@ -216,7 +216,7 @@ if img_file_buffer is not None:
                 st.error("**Oops**, something went wrong with the bytes:sweat: Please try again.")
                 st.write(f"Error {res.status_code}: {res.content.decode('utf-8')}")
         except requests.exceptions.RequestException as e:
-            st.error("**Oops**, something went wrong :sweat: Please try again.")
+            st.error("**Oops**, something went wrong with this :sweat: Please try again.")
             st.write(f"RequestException: {e}")
 else:
     st.markdown('<div class="white-text">Please upload an image to get started.</div>', unsafe_allow_html=True)
